@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Meus Palpites
-</body>
-</html>
+{% extends 'base.html' %}
+
+<!-- 
+
+Essa tela irá mostrar:
+
+todos os meus palpites
+-->
+
+{% block title %}
+Meus Palpites
+{% endblock %}
+
+{% block content %}
+<h1>Meus palpites</h1>
+{% endblock %}

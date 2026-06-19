@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+<!-- 
+
+Essa tela irá mostrar:
+ 
+as regras do jogo
+-->
+
+{% block title %}
+Regras
+{% endblock %}
+
+{% block content %}
+<h1>Regras</h1>
+
+<p>
+
+    Placar correto:
+    {{ configuracao.pontos_placar_exato }} pontos
+
+</p>
+
+
+<p>
+
+    Resultado correto:
+    {{ configuracao.pontos_resultado }} pontos
+
+</p>
+
+<p>
+
+    Primeiro critério de desempate:
+    {{ configuracao.get_criterio_desempate_1_display }} 
+
+</p>
+
+<p>
+
+    Segundo critério de desempate:
+    {{ configuracao.get_criterio_desempate_2_display }} 
+
+</p>
+
+
+{% endblock %}
