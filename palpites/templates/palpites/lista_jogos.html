@@ -7,10 +7,19 @@ Jogos Disponíveis para Palpite - Sistema Bolão Copa
 {% block content %}
 <div class="container my-5">
 
-    <div class="row mb-5 text-center">
-        <div class="col-12">
-            <h1 class="display-5 fw-bold text-dark">Faça seus Palpites!</h1>
-            <p class="lead text-muted">Selecione uma das partidas abaixo que ainda não começaram para registrar ou alterar o seu palpite.</p>
+    <div class="row mb-5 align-items-center">
+        <div class="col">
+            <h1 class="h2 fw-bold text-dark mb-1">Faça seus Palpites!</h1>
+            <p class="text-muted mb-0">Selecione uma das partidas abaixo que ainda não começaram para registrar ou alterar o seu palpite.</p>
+        </div>
+        
+        <div class="col-auto d-flex gap-2">
+            <a href="{% url 'palpites:meus_palpites' %}" class="btn btn-primary btn-sm">
+                <i class="bi bi-person-check"></i> Meus Palpites
+            </a>
+            <a href="{% url 'campeonato:home' %}" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-arrow-left"></i> Voltar para Home
+            </a>
         </div>
     </div>
 

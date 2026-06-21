@@ -1,47 +1,84 @@
 {% extends 'base.html' %}
 
-<!-- 
-
-Essa tela irá mostrar:
- 
-as regras do jogo
--->
-
 {% block title %}
-Regras
+Regras do Bolão
 {% endblock %}
 
 {% block content %}
-<h1>Regras</h1>
+<div class="container my-5">
+    
+    <div class="row mb-5 text-center">
+        <div class="col-12">
+            <div class="display-5 fw-bold text-dark mb-2">
+                <i class="bi bi-journal-text text-primary me-2"></i>Regras do Jogo
+            </div>
+            <p class="lead text-muted">Entenda como funciona a pontuação e os critérios de desempate do nosso bolão.</p>
+        </div>
+    </div>
 
-<p>
+    <div class="row g-4 justify-content-center">
+        
+        <div class="col-md-6 col-lg-5">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-primary text-white py-3 border-0">
+                    <h2 class="h5 fw-bold mb-0"><i class="bi bi-award-fill me-2"></i>Sistema de Pontuação</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom">
+                        <div>
+                            <h3 class="h6 fw-bold text-dark mb-1">Placar Exato</h3>
+                            <p class="text-muted small mb-0">Acertou em cheio o placar final da partida.</p>
+                        </div>
+                        <span class="badge bg-success fs-5 px-3 py-2 rounded-pill">+{{ configuracao.pontos_placar_exato }} pts</span>
+                    </div>
 
-    Placar correto:
-    {{ configuracao.pontos_placar_exato }} pontos
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h3 class="h6 fw-bold text-dark mb-1">Resultado Correto</h3>
+                            <p class="text-muted small mb-0">Acertou o vencedor ou empate, mas errou os gols.</p>
+                        </div>
+                        <span class="badge bg-secondary fs-5 px-3 py-2 rounded-pill">+{{ configuracao.pontos_resultado }} pts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</p>
+        <div class="col-md-6 col-lg-5">
+            <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="card-header bg-dark text-white py-3 border-0">
+                    <h2 class="h5 fw-bold mb-0"><i class="bi bi-lightning-fill me-2"></i>Critérios de Desempate</h2>
+                </div>
+                <div class="card-body p-4">
+                    <p class="text-muted small mb-4">Caso dois ou mais participantes fiquem empatados na tabela geral, a ordem de prioridade será:</p>
+                    
+                    <div class="position-relative ps-4 border-start border-2 border-light">
+                        
+                        <div class="mb-4 position-relative">
+                            <div class="bg-primary text-white rounded-circle position-absolute d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 24px; height: 24px; left: -37px; top: 0;">1</div>
+                            <h3 class="h6 fw-bold text-dark mb-1">Primeiro Critério</h3>
+                            <p class="text-primary fw-semibold mb-0">{{ configuracao.get_criterio_desempate_1_display }}</p>
+                        </div>
 
+                        <div class="position-relative">
+                            <div class="bg-secondary text-white rounded-circle position-absolute d-flex align-items-center justify-content-center fw-bold shadow-sm" style="width: 24px; height: 24px; left: -37px; top: 0;">2</div>
+                            <h3 class="h6 fw-bold text-dark mb-1">Segundo Critério</h3>
+                            <p class="text-secondary fw-semibold mb-0">{{ configuracao.get_criterio_desempate_2_display }}</p>
+                        </div>
 
-<p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    Resultado correto:
-    {{ configuracao.pontos_resultado }} pontos
+    </div>
 
-</p>
+    <div class="row mt-5 text-center">
+        <div class="col-12">
+            <a href="{% url 'campeonato:home' %}" class="btn btn-outline-primary px-4 py-2 fw-semibold rounded-pill shadow-sm">
+                <i class="bi bi-house-door me-1"></i> Voltar para o Início
+            </a>
+        </div>
+    </div>
 
-<p>
-
-    Primeiro critério de desempate:
-    {{ configuracao.get_criterio_desempate_1_display }} 
-
-</p>
-
-<p>
-
-    Segundo critério de desempate:
-    {{ configuracao.get_criterio_desempate_2_display }} 
-
-</p>
-
-
+</div>
 {% endblock %}

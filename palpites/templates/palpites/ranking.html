@@ -1,33 +1,68 @@
 {% extends 'base.html' %}
 
+{% block title %}
+Ranking Geral - Sistema Bolão Copa
+{% endblock %}
+
 {% block content %}
+<div class="container my-5">
 
-<h1 class="text-center">Ranking</h1>
+    <div class="row mb-5 align-items-center">
+        <div class="col">
+            <h1 class="h2 fw-bold text-dark mb-1">Ranking Geral</h1>
+            <p class="text-muted mb-0">Acompanhe a pontuação e veja quem está liderando o bolão!</p>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'campeonato:home' %}" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-arrow-left"></i> Voltar para Home
+            </a>
+        </div>
+    </div>
 
-<table class="table">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th scope="col" style="width: 100px;">Posição</th>
+                                <th scope="col" class="text-start">Participante</th>
+                                <th scope="col" style="width: 150px;">Pontuação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% for usuario in ranking %}
+                                <tr>
+                                    <td>
+                                        
+                                        <span class="text-muted fw-bold">{{ forloop.counter }}º</span>
+                                    
+                                    </td>
+                                    
+                                    <td class="text-start fw-semibold text-dark">
+                                        <i class="bi bi-person-circle me-2 text-muted fs-5"></i>{{ usuario.username }}
+                                    </td>
+                                    
+                                    <td>
+                                        <span class="fs-5 fw-bold text-primary">{{ usuario.total_pontos|default:0 }}</span>
+                                        <span class="text-muted small">pts</span>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-5">
+                                        <i class="bi bi-person-dash fs-1 d-block mb-3"></i>
+                                        Nenhum participante pontuou ainda. Os pontos aparecerão assim que os jogos forem encerrados!
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Usuário</th>
-            <th>Pontos</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-        {% for usuario in ranking %}
-
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ usuario.username }}</td>
-            <td>{{ usuario.total_pontos|default:0 }}</td>
-        </tr>
-
-        {% endfor %}
-
-    </tbody>
-
-</table>
-
+</div>
 {% endblock %}

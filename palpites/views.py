@@ -82,7 +82,16 @@ def palpitar(request, jogo_id):
 
 
 def meus_palpites(request):
-    return render(request, 'palpites/meus_palpites.html')
+
+    palpites = Palpite.objects.filter(
+        usuario=request.user
+    ).select_related(
+        'jogo',
+        'jogo__time_casa',
+        'jogo__time_fora'
+    ).order_by('jogo__data_hora')
+
+    return render(request, 'palpites/meus_palpites.html', {'palpites': palpites})
 
 def ranking(request):
 
