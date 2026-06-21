@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 # Create your models here.
@@ -57,6 +58,20 @@ class Jogo(models.Model):
             raise ValidationError(
                 'Um mesmo time não pode jogar contra ele mesmo'
             )
+    
+    def resultado(self):
+        if self.gols_casa > self.gols_fora:
+            return 'casa'
+        if self.gols_fora > self.gols_casa:
+            return 'fora'
+        return 'empate'
+    
+    @property
+    def precisa_resultado(self):
+        return (
+            not self.encerrado
+            and self.data_hora <= timezone.now()
+        )
 
 
 class Configuracao(models.Model):

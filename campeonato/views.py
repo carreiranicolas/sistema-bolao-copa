@@ -1,15 +1,35 @@
 from django.shortcuts import render
-from .models import Configuracao
+from django.utils import timezone
+from .models import Configuracao, Jogo
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'campeonato/home.html')
+
+    agora = timezone.now()
+
+    # Filtra os jogos onde data_hora é MAIOR que agora (gt = greater than)
+    proximos_jogos = Jogo.objects.filter(data_hora__gt=agora).order_by('data_hora')[:5]
+
+    
+    context = {
+        'jogos': proximos_jogos
+    }
+
+    return render(request, 'campeonato/home.html', context=context)
 
 
 def jogos(request):
-    return render(request, 'campeonato/jogos.html')
+
+    todos_os_jogos = Jogo.objects.all()
+
+
+    context = {
+        'jogos': todos_os_jogos
+    }
+
+    return render(request, 'campeonato/jogos.html', context=context)
 
 def regras(request):
 

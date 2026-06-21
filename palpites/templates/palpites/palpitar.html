@@ -1,16 +1,79 @@
 {% extends 'base.html' %}
 
-<!-- 
-
-Essa tela irá mostrar:
-
-O jogo sendo palpitado
--->
-
 {% block title %}
-Palpitar
+Registrar Palpite - Sistema Bolão Copa
 {% endblock %}
 
 {% block content %}
-<h1>Palpitar</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            
+            <div class="mb-3">
+                <a href="{% url 'palpites:lista_jogos' %}" class="btn btn-sm btn-link text-decoration-none text-muted p-0">
+                    <i class="bi bi-arrow-left"></i> Voltar para a lista
+                </a>
+            </div>
+
+            <div class="card shadow-lg border-0 bg-light rounded-4 overflow-hidden">
+                
+                <div class="card-header bg-primary text-white text-center py-4 border-0">
+                    <h1 class="h4 fw-bold mb-1">Seu Palpite</h1>
+                    <p class="small opacity-75 mb-0">Insira o placar final e confirme o seu voto</p>
+                </div>
+
+                <form method="post" class="card-body p-4 pt-5">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> Por favor, corrija os erros abaixo.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
+                    <div class="row align-items-center text-center mb-5">
+                        
+                        <div class="col-4">
+                            <span class="fs-4 fw-bold text-dark d-block text-truncate mb-2">{{ jogo.time_casa }}</span>
+                            <span class="badge bg-secondary opacity-75 fw-normal">Mandante</span>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <div style="width: 65px;">
+                                    {{ form.gols_casa }}
+                                </div>
+                                
+                                <span class="fs-4 fw-bold text-muted px-1">x</span>
+                                
+                                <div style="width: 65px;">
+                                    {{ form.gols_fora }}
+                                </div>
+                            </div>
+                            <div class="text-muted small fw-bold mt-3">
+                                {{ jogo.data_hora|date:"d/m/Y - H:i" }}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <span class="fs-4 fw-bold text-dark d-block text-truncate mb-2">{{ jogo.time_fora }}</span>
+                            <span class="badge bg-secondary opacity-75 fw-normal">Visitante</span>
+                        </div>
+
+                    </div>
+
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-success btn-lg fw-bold shadow-sm py-3">
+                            Confirmar Palpite <i class="bi bi-check-circle-fill ms-1"></i>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}
