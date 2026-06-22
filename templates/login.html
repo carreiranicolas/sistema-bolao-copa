@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Entrar
+{% endblock %}
+
+{% block content %}
+<div class="container my-5 py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            
+            <div class="text-center mb-4">
+                <div class="mb-3">
+                    <img
+                        src="{% static 'imagens/trofeu.png' %}"
+                        alt="Troféu da Copa"
+                        class="img-fluid"
+                        style="width: 120px;"
+                    >
+                </div>
+                <h1 class="h3 fw-bold text-dark">Bem-vindo de volta!</h1>
+                <p class="text-muted small">Entre com sua conta para palpitar</p>
+            </div>
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <form method="post">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger py-2 small mb-4" role="alert">
+                                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                Usuário ou senha incorretos.
+                            </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label for="{{ form.username.id_for_label }}" class="form-label small fw-bold text-muted">Usuário</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-person"></i></span>
+                                <input type="text" name="username" autofocus maxlength="150" required id="id_username" 
+                                       class="form-control bg-light border-start-0 ps-0 shadow-none" placeholder="Digite seu usuário">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between">
+                                <label for="{{ form.password.id_for_label }}" class="form-label small fw-bold text-muted">Senha</label>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-lock"></i></span>
+                                <input type="password" name="password" required id="id_password" 
+                                       class="form-control bg-light border-start-0 ps-0 shadow-none" placeholder="Sua senha secreta">
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm py-2">
+                                Entrar no Bolão <i class="bi bi-box-arrow-in-right ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'campeonato:home' %}" class="text-muted small text-decoration-none">
+                    <i class="bi bi-house-door"></i> Voltar para o início
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

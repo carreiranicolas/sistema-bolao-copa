@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models import Sum
@@ -25,7 +26,7 @@ def lista_jogos(request):
     return render(request, 'palpites/lista_jogos.html', context=context)
 
 
-
+@login_required
 def palpitar(request, jogo_id):
 
     jogo = get_object_or_404(
@@ -80,7 +81,7 @@ def palpitar(request, jogo_id):
 
     return render(request, 'palpites/palpitar.html', context=context)
 
-
+@login_required
 def meus_palpites(request):
 
     palpites = Palpite.objects.filter(
@@ -93,6 +94,7 @@ def meus_palpites(request):
 
     return render(request, 'palpites/meus_palpites.html', {'palpites': palpites})
 
+@login_required
 def ranking(request):
 
     ranking = (
