@@ -168,6 +168,8 @@ etapa são definidas as entidades, relacionamento entre as tabelas e regra do ne
 
 Partindo para a parte de relacionamentos, montei um modelo conceitual do banco, onde pode ser visto de forma simples os relacionamentos adotados:
 
+![Modelo Conceitual](modelo-conceitual.png)
+
 
 Descrevendo os relacionamentos, teremos:
 
