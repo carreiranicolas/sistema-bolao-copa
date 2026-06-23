@@ -199,3 +199,5 @@ Algumas restrições do negócio que gostaria de compartilhar:
 ---
 
 ## ⌨️ Navegando 
+
+![Demonstração do Projeto](navegacao.gif)
